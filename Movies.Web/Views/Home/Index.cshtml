@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Movie>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<h1 class="display-4 mb-5">
+		Watch New Movie Trailers
+	</h1>
+
+    <div class="row">
+		@foreach (var movie in Model)
+		{
+			<div class="col-3 mb-4">
+				<div class="card" style="width: 18rem;">
+					<img class="card-img-top" style="height: 20rem;" src="data:image\/*;base64,@Convert.ToBase64String(movie.Poster)" alt="@movie.Title">
+					<div class="card-body">
+						<h5 class="card-title mb-3">@movie.Title (@movie.Year)</h5>
+						<div class="d-flex justify-content-between">
+							<div>
+								<a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id" class="btn btn-outline-secondary">
+									<i class="bi bi-play"></i>
+									Watch
+								</a>
+							</div>
+							<p class="card-text">
+								<i class="bi bi-star-fill text-warning"></i>
+								<small class="text-muted">@movie.Rate.ToString("0.0")</small>
+							</p>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		}
+	</div>
+
+</div>
